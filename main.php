@@ -9,6 +9,8 @@
 =====================================================
 */
 
+defined('_USE_NQ_CMS') or Die('Direct Access to this location is not allowed.');
+
 require_once 'libs/Dev.php';
 
 use engine\core\Router;
