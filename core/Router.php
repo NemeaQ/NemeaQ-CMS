@@ -13,7 +13,7 @@ namespace engine\core;
 
 /**
  * Class Router
- * @package app\core
+ * @package engine\core
  */
 class Router
 {
@@ -111,7 +111,7 @@ class Router
     public function run()
     {
         if ($this->match()) {
-            $path = 'app\controllers\\' . ucfirst($this->params[0]) . 'Controller';
+            $path = 'content\controllers\\' . ucfirst($this->params[0]) . 'Controller';
             if (class_exists($path)) {
                 $action = $this->params[1] . 'Action';
                 if (method_exists($path, $action)) {

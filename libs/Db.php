@@ -1,13 +1,13 @@
 <?php
 
 
-namespace app\lib;
+namespace engine\libs;
 
 use mysqli_sql_exception;
 
 /**
  * Class Db
- * @package app\lib
+ * @package engine\libs
  */
 class Db
 {
@@ -20,7 +20,7 @@ class Db
 
     public function __construct()
     {
-        $config = require 'app/config.php';
+        $config = require 'content/config.php';
         try {
             $this->db = mysqli_connect($config['mysql_host'], $config['mysql_user'], $config['mysql_password'], $config['mysql_base'], $config['mysql_port']);
         } catch(mysqli_sql_exception $error){
