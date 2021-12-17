@@ -1,5 +1,4 @@
 <?php
-
 /*
 =====================================================
  NemeaQ-CMS - by NemeaQ
@@ -10,7 +9,7 @@
 =====================================================
 */
 
-namespace app\core;
+namespace engine\core;
 
 /**
  * Class Router

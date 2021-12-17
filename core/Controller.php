@@ -1,5 +1,4 @@
 <?php
-
 /*
 =====================================================
  NemeaQ-CMS - by NemeaQ
@@ -10,9 +9,9 @@
 =====================================================
 */
 
-namespace app\core;
+namespace engine\core;
 
-use app\core\View;
+use engine\core\View;
 
 /**
  * Class Controller

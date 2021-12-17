@@ -7,12 +7,11 @@
 -----------------------------------------------------
  Copyright (c) 2021 NemeaQ
 =====================================================
-
 */
 
-require 'engine/libs/Dev.php';
+require 'libs/Dev.php';
 
-use app\core\Router;
+use core\Router;
 
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class . '.php');

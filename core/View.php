@@ -1,6 +1,6 @@
 <?php
 
-namespace app\core;
+namespace engine\core;
 
 /**
  * Class View
@@ -8,7 +8,6 @@ namespace app\core;
  */
 class View
 {
-
     /**
      * @var string
      */
