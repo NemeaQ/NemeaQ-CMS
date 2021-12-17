@@ -1,6 +1,16 @@
 <?php
-
+/*
+=====================================================
+ NemeaQ-CMS - by NemeaQ
+-----------------------------------------------------
+ https://hanriel.ru/
+-----------------------------------------------------
+ Copyright (c) 2021 NemeaQ
+=====================================================
+*/
 namespace engine\core;
+
+defined('_USE_NQ_CMS') or Die('Direct Access to this location is not allowed.');
 
 /**
  * Class View
