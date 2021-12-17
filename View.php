@@ -39,10 +39,10 @@ class View
     public function render($title, $vars = [])
     {
         extract($vars);
-        $path = 'app/views/' . $this->path . '.php';
-        if (file_exists($path)) {
+        $renderPath = 'app/views/' . $this->path . '.php';
+        if (file_exists($renderPath)) {
             ob_start();
-            require $path;
+            require $renderPath;
             $content = ob_get_clean();
             require 'app/views/layouts/' . $this->layout . '.php';
         }
@@ -114,7 +114,7 @@ class View
     /**
      * @param string $vars
      */
-    public function raw_json(string $vars = '{}')
+    public function raw_json($vars = '{}')
     {
         exit($vars);
     }
