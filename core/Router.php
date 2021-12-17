@@ -8,9 +8,10 @@
  Copyright (c) 2021 NemeaQ
 =====================================================
 */
+
 namespace engine\core;
 
-defined('_USE_NQ_CMS') or Die('Direct Access to this location is not allowed.');
+defined('_USE_NQ_CMS') or die('Direct Access to this location is not allowed.');
 
 /**
  * Class Router
@@ -19,37 +20,29 @@ defined('_USE_NQ_CMS') or Die('Direct Access to this location is not allowed.');
 class Router
 {
     protected $raw_routes = [
-        /** Route                       => Controller Action */
-        /** Main */
-        ''                              => ['main', 'index',],
-        'rules'                         => ['main', 'rules',],
-        'map'                           => ['main', 'map',],
-        'donate'                        => ['main', 'donate',],
-        'copy'                          => ['main', 'copy',],
-
         /** Account */
-        'login'                         => ['account', 'login',],
-        'profile'                       => ['account', 'profile'],
-        'logout'                        => ['account', 'logout',],
-        'register'                      => ['account', 'register',],
-        'account/confirm/{token:.*}'    => ['account', 'confirm',],
-        'settings'                      => ['account', 'settings',],
+        'login' => ['account', 'login',],
+        'profile' => ['account', 'profile'],
+        'logout' => ['account', 'logout',],
+        'register' => ['account', 'register',],
+        'account/confirm/{token:.*}' => ['account', 'confirm',],
+        'settings' => ['account', 'settings',],
 
         /** API */
-        'api/status'                    => ['api', 'status',],
-        'api/link/{token:.*}'           => ['api', 'link',],
-        'api/cardSocket'                => ['api', 'cardSocket',],
+        'api/status' => ['api', 'status',],
+        'api/link/{token:.*}' => ['api', 'link',],
+        'api/cardSocket' => ['api', 'cardSocket',],
 
 
         /** Админпанель */
-        'admin'                         => ['admin', 'dashboard',],
-        'admin/login'                   => ['admin', 'login',],
-        'admin/logout'                  => ['admin', 'logout',],
-        'admin/users'                   => ['admin', 'users',],
-        'admin/players'                 => ['admin', 'players',],
-        'admin/reports'                 => ['admin', 'reports',],
-        'admin/groups'                  => ['admin', 'groups',],
-        'admin/player/{id:\d+}/change'  => ['admin', 'changePlayer',]
+        'admin' => ['admin', 'dashboard',],
+        'admin/login' => ['admin', 'login',],
+        'admin/logout' => ['admin', 'logout',],
+        'admin/users' => ['admin', 'users',],
+        'admin/players' => ['admin', 'players',],
+        'admin/reports' => ['admin', 'reports',],
+        'admin/groups' => ['admin', 'groups',],
+        'admin/player/{id:\d+}/change' => ['admin', 'changePlayer',]
     ];
     /**
      * Путь Контроллера
@@ -67,7 +60,24 @@ class Router
      */
     public function __construct()
     {
+        foreach (glob('content/controllers/*.php') as $file) {
+            require_once $file;
+            $class = basename($file, '.php');
+
+            if (class_exists($class)) {
+                $obj = new $class;
+                $this->addRoutes($obj->routes);
+            }
+        }
+
         foreach ($this->raw_routes as $key => $route) {
+            $this->addRoute($key, $route);
+        }
+    }
+
+    private function addRoutes($routes)
+    {
+        foreach ($routes as $key => $route) {
             $this->addRoute($key, $route);
         }
     }
