@@ -4,7 +4,7 @@ namespace engine\core;
 
 /**
  * Class View
- * @package app\core
+ * @package engine\core
  */
 class View
 {
@@ -38,12 +38,12 @@ class View
     public function render($title, $vars = [])
     {
         extract($vars);
-        $renderPath = 'app/views/' . $this->path . '.php';
+        $renderPath = 'content/views/' . $this->path . '.php';
         if (file_exists($renderPath)) {
             ob_start();
             require $renderPath;
             $content = ob_get_clean();
-            require 'app/views/layouts/' . $this->layout . '.php';
+            require 'content/views/layouts/' . $this->layout . '.php';
         }
     }
 
@@ -62,7 +62,7 @@ class View
     public static function errorCode($code)
     {
         http_response_code($code);
-        $path = 'app/views/errors/' . $code . '.php';
+        $path = 'content/views/errors/' . $code . '.php';
         if (file_exists($path)) {
             require $path;
         }

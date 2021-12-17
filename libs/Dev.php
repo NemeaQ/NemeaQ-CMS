@@ -2,7 +2,7 @@
 
 $debug = false;
 ini_set('display_errors', $debug ? 1 : 0);
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 /**
  * @param $str

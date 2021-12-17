@@ -15,15 +15,15 @@ use engine\core\View;
 
 /**
  * Class Controller
- * @package app\core
+ * @package engine\core
  * @author Hanriel
  */
 abstract class Controller
 {
-
     public $route;
     public $view;
     public $acl;
+
     /**
      * Конфигурации сайта
      * @var array|mixed
@@ -36,7 +36,7 @@ abstract class Controller
      */
     public function __construct($route)
     {
-        $this->config = require 'app/config.php';
+        $this->config = require 'content/config.php';
         $this->route = $route;
         if (!$this->checkAcl()) {
             View::errorCode(403);
@@ -51,7 +51,7 @@ abstract class Controller
      */
     public function loadModel($name)
     {
-        $path = 'app\models\\' . ucfirst($name);
+        $path = 'content\models\\' . ucfirst($name);
         if (class_exists($path)) {
             return new $path;
         }

@@ -9,9 +9,9 @@
 =====================================================
 */
 
-require 'libs/Dev.php';
+require_once 'libs/Dev.php';
 
-use core\Router;
+use engine\core\Router;
 
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class . '.php');

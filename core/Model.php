@@ -13,7 +13,7 @@ namespace engine\core;
 
 /**
  * Class Model
- * @package app\core
+ * @package engine\core
  */
 abstract class Model
 {
@@ -28,6 +28,6 @@ abstract class Model
      */
     public function __construct()
     {
-        $this->config = require 'app/config.php';
+        $this->config = require 'content/config.php';
     }
 }
