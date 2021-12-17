@@ -1,9 +1,17 @@
 <?php
+/*
+=====================================================
+ NemeaQ-CMS - by NemeaQ
+-----------------------------------------------------
+ https://hanriel.ru/
+-----------------------------------------------------
+ Copyright (c) 2021 NemeaQ
+=====================================================
+*/
 
+namespace engine\core;
 
-namespace app\core;
-
-use app\core\View;
+use engine\core\View;
 
 /**
  * Class Controller
@@ -56,16 +64,12 @@ abstract class Controller
      */
     public function checkAcl()
     {
-        if ($this->isAcl('all')) {
-            return true;
-        } elseif (isset($_SESSION['account']['id']) and $this->isAcl('authorize')) {
-            return true;
-        } elseif (!isset($_SESSION['account']['id']) and $this->isAcl('guest')) {
-            return true;
-        } elseif (isset($_SESSION['admin']) and $this->isAcl('admin')) {
-            return true;
-        }
-        return false;
+        return (
+            $this->isAcl('all') ||
+            isset($_SESSION['account']['id']) && $this->isAcl('authorize') ||
+            !isset($_SESSION['account']['id']) && $this->isAcl('guest') ||
+            isset($_SESSION['admin']) && $this->isAcl('admin')
+        );
     }
 
     /**
