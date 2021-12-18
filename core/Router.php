@@ -19,31 +19,6 @@ defined('_USE_NQ_CMS') or die('Direct Access to this location is not allowed.');
  */
 class Router
 {
-    protected $raw_routes = [
-        /** Account */
-        'login' => ['account', 'login',],
-        'profile' => ['account', 'profile'],
-        'logout' => ['account', 'logout',],
-        'register' => ['account', 'register',],
-        'account/confirm/{token:.*}' => ['account', 'confirm',],
-        'settings' => ['account', 'settings',],
-
-        /** API */
-        'api/status' => ['api', 'status',],
-        'api/link/{token:.*}' => ['api', 'link',],
-        'api/cardSocket' => ['api', 'cardSocket',],
-
-
-        /** Админпанель */
-        'admin' => ['admin', 'dashboard',],
-        'admin/login' => ['admin', 'login',],
-        'admin/logout' => ['admin', 'logout',],
-        'admin/users' => ['admin', 'users',],
-        'admin/players' => ['admin', 'players',],
-        'admin/reports' => ['admin', 'reports',],
-        'admin/groups' => ['admin', 'groups',],
-        'admin/player/{id:\d+}/change' => ['admin', 'changePlayer',]
-    ];
     /**
      * Путь Контроллера
      * @var array
@@ -63,15 +38,10 @@ class Router
         foreach (glob('content/controllers/*.php') as $file) {
             require_once $file;
             $class = basename($file, '.php');
-
-            if (class_exists($class)) {
-                $obj = new $class;
+            if (class_exists('content\controllers\\'.$class)) {
+                $obj = new ('content\controllers\\'.$class)($this->params);
                 $this->addRoutes($obj->routes);
             }
-        }
-
-        foreach ($this->raw_routes as $key => $route) {
-            $this->addRoute($key, $route);
         }
     }
 
