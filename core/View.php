@@ -10,6 +10,8 @@
 */
 namespace engine\core;
 
+use JetBrains\PhpStorm\NoReturn;
+
 defined('_USE_NQ_CMS') or Die('Direct Access to this location is not allowed.');
 
 /**
@@ -21,15 +23,17 @@ class View
     /**
      * @var string
      */
-    public $path;
+    public string $path;
+
     /**
-     * @var
+     * @var array
      */
-    public $route;
+    public array $route;
+
     /**
      * @var string
      */
-    public $layout = 'index';
+    public string $layout = 'index';
 
     /**
      * View constructor.
@@ -45,7 +49,7 @@ class View
      * @param $title
      * @param array $vars
      */
-    public function render($title, $vars = [])
+    public function render($title, array $vars = [])
     {
         extract($vars);
         $renderPath = 'content/views/' . $this->path . '.php';
@@ -60,7 +64,7 @@ class View
     /**
      * @param $url
      */
-    public function redirect($url)
+    #[NoReturn] public function redirect($url)
     {
         header('location: ' . $url);
         exit;
@@ -86,7 +90,7 @@ class View
      * @param $message
      * Отображаемое собощение
      */
-    public function message($status, $message)
+    #[NoReturn] public function message($status, $message)
     {
         exit(json_encode(['status' => $status, 'message' => $message]));
     }
@@ -94,12 +98,12 @@ class View
     /**
      * @param $url
      */
-    public function location($url)
+    #[NoReturn] public function location($url)
     {
         exit(json_encode(['url' => $url]));
     }
 
-    public function reload()
+    #[NoReturn] public function reload()
     {
         exit(json_encode(['reload' => 'OK']));
     }
@@ -107,7 +111,7 @@ class View
     /**
      * @param array $vars
      */
-    public function data(array $vars = [])
+    #[NoReturn] public function data(array $vars = [])
     {
         exit(json_encode(['status' => 'OK', 'data' => $vars]));
     }
@@ -115,7 +119,7 @@ class View
     /**
      * @param array $vars
      */
-    public function json(array $vars = [])
+    #[NoReturn] public function json(array $vars = [])
     {
         exit(json_encode($vars));
     }
@@ -123,7 +127,7 @@ class View
     /**
      * @param string $vars
      */
-    public function raw_json($vars = '{}')
+    #[NoReturn] public function raw_json($vars = '{}')
     {
         exit($vars);
     }

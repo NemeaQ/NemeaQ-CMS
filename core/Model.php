@@ -20,9 +20,9 @@ abstract class Model
 {
     /**
      * Конфигурации сайта
-     * @var array|mixed
+     * @var array
      */
-    public $config;
+    public array $config;
 
     /**
      * Model constructor

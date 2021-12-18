@@ -23,12 +23,12 @@ class Router
      * Путь Контроллера
      * @var array
      */
-    protected $routes = [];
+    protected array $routes = [];
     /**
      * Controller и Action
      * @var array
      */
-    protected $params = [];
+    protected array $params = [];
 
     /**
      * Router constructor.
@@ -39,7 +39,7 @@ class Router
             require_once $file;
             $class = basename($file, '.php');
             if (class_exists('content\controllers\\'.$class)) {
-                $obj = new ('content\controllers\\'.$class)($this->params);
+                $obj = new ('content\controllers\\'.$class)();
                 $this->addRoutes($obj->routes);
             }
         }
@@ -96,7 +96,8 @@ class Router
             if (class_exists($path)) {
                 $action = $this->params[1] . 'Action';
                 if (method_exists($path, $action)) {
-                    $controller = new $path($this->params);
+                    $controller = new $path();
+                    $controller->loadC($this->params);
                     $controller->$action();
                 } else {
                     View::errorCode(404);
