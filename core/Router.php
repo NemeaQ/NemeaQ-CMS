@@ -97,7 +97,7 @@ class Router
                 $action = $this->params[1] . 'Action';
                 if (method_exists($path, $action)) {
                     $controller = new $path();
-                    $controller->loadC($this->params);
+                    $controller->load($this->params);
                     $controller->$action();
                 } else {
                     View::errorCode(404);
