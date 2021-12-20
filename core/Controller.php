@@ -21,15 +21,16 @@ use engine\core\View;
  */
 abstract class Controller
 {
-    public $route;
-    public $view;
-    public $acl;
+    public Model $model;
+    public View $view;
+    public array $route;
+    public array $acl;
 
     /**
      * Конфигурации сайта
      * @var array|mixed
      */
-    public $config;
+    public array $config;
 
     /**
      * Controller constructor.
@@ -48,9 +49,9 @@ abstract class Controller
 
     /**
      * @param $name 'Имя модели'
-     * @return Model
+     * @return Model|null
      */
-    public function loadModel($name)
+    public function loadModel($name): ?Model
     {
         $path = 'content\models\\' . ucfirst($name);
         if (class_exists($path)) {
@@ -63,7 +64,7 @@ abstract class Controller
      * Cписок контроля доступа
      * @return bool
      */
-    public function checkAcl()
+    public function checkAcl(): bool
     {
         return (
             $this->isAcl('all') ||
@@ -78,7 +79,7 @@ abstract class Controller
      * @param $key
      * @return bool
      */
-    public function isAcl($key)
+    public function isAcl($key): bool
     {
         return in_array($this->route[1], $this->acl[$key]);
     }
